@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>theako ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fad0c4,#ffdde1);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    text-align:center;
+    background:rgba(255,255,255,.25);
+    backdrop-filter:blur(12px);
+    padding:40px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    max-width:600px;
+    z-index:2;
+}
+
+h1{
+    color:#ff4d88;
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+p{
+    color:#444;
+    font-size:1.2rem;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+#countdown{
+    font-size:2.2rem;
+    color:#d6336c;
+    font-weight:bold;
+}
+
+.small{
+    margin-top:10px;
+    color:#666;
+}
+
+.heart{
+    position:absolute;
+    color:#ff4d88;
+    font-size:24px;
+    animation:float 8s linear infinite;
+    opacity:.7;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh) rotate(0deg);
+    }
+    to{
+        transform:translateY(-120px) rotate(360deg);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>❤️</h1>
+
+    <p>
+        ჩემ ლამაზ გოგოსთან შეხვედრამდე დარჩენილია. 💕
+    </p>
+
+    <div id="countdown">Loading...</div>
+    <div class="small">18:00</div>
+</div>
+
+<script>
+function updateCountdown() {
+
+    const now = new Date();
+
+    const target = new Date();
+    target.setHours(18,0,0,0);
+
+    if(now > target){
+        document.getElementById("countdown").innerHTML =
+            "❤️ It's 18:00! ❤️";
+        return;
+    }
+
+    const diff = target - now;
+
+    const hours = Math.floor(diff/(1000*60*60));
+    const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((diff%(1000*60))/1000);
+
+    document.getElementById("countdown").innerHTML =
+        `${hours}h ${minutes}m ${seconds}s`;
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+function createHeart(){
+
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML=["❤️","💕","💖","💗"][Math.floor(Math.random()*4)];
+
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(20+Math.random()*30)+"px";
+    heart.style.animationDuration=(5+Math.random()*6)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },10000);
+}
+
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
